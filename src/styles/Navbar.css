@@ -1,0 +1,82 @@
+.navbar {
+  height: 64px;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px;
+  flex-shrink: 0;
+}
+
+.navbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobileMenuBtn {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #dedbe5;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #2f2a3d;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.companySelect {
+  height: 36px;
+  min-width: 210px;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #ffffff;
+  font-size: 13px;
+  color: #111827;
+  outline: none;
+}
+
+.navIcons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    height: 58px;
+    padding: 0 16px;
+  }
+
+  .mobileMenuBtn {
+    display: block;
+  }
+
+  .companySelect {
+    min-width: 170px;
+    max-width: 190px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 12px;
+  }
+
+  .companySelect {
+    min-width: 135px;
+    max-width: 150px;
+    font-size: 11px;
+  }
+
+  .navIcons {
+    gap: 10px;
+    font-size: 16px;
+  }
+}

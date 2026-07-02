@@ -1,0 +1,273 @@
+.disbursementHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.disbursementHeader h1 {
+  margin: 0 0 7px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f1f2c;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.statCard {
+  background: #ffffff;
+  border: 1px solid #eeeaf7;
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 6px 18px rgba(47, 43, 61, 0.05);
+}
+
+.statCard p {
+  font-size: 12px;
+  color: #7b7488;
+  margin: 0 0 8px;
+}
+
+.statCard h2 {
+  font-size: 22px;
+  color: #211c2e;
+  margin: 0;
+}
+
+.tableCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 8px 28px rgba(47, 43, 61, 0.08);
+}
+
+.tableToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.tableToolbar input {
+  width: 360px;
+  height: 36px;
+  border: 1px solid #dedbe5;
+  border-radius: 8px;
+  padding: 0 12px;
+  outline: none;
+  font-size: 13px;
+}
+
+.toolbarActions {
+  display: flex;
+  gap: 10px;
+}
+
+.toolbarActions button {
+  height: 34px;
+  border: 1px solid #dedbe5;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b465c;
+}
+
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #eeeaf7;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1250px;
+}
+
+thead {
+  background: #fafafa;
+}
+
+th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6f687c;
+  padding: 12px;
+  border-bottom: 1px solid #eeeaf7;
+  white-space: nowrap;
+}
+
+td {
+  font-size: 12px;
+  color: #312b3f;
+  padding: 12px;
+  border-bottom: 1px solid #f0eef5;
+  white-space: nowrap;
+}
+
+tbody tr:hover {
+  background: #faf8ff;
+}
+
+.loanLink {
+  color: #6d3de8;
+  font-weight: 600;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.statusPill.draft {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.statusPill.submitted {
+  background: #e8f8ef;
+  color: #12a150;
+}
+
+.statusPill.verified {
+  background: #e6f6ff;
+  color: #0086c9;
+}
+
+.statusPill.audited {
+  background: #efe7ff;
+  color: #7c3aed;
+}
+
+.pagination {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #6f687c;
+}
+
+.pagination button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #dedbe5;
+  background: #ffffff;
+  border-radius: 7px;
+}
+
+.paginationRight {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.paginationRight select {
+  height: 30px;
+  border: 1px solid #dedbe5;
+  border-radius: 7px;
+}
+
+@media (max-width: 1100px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .disbursementHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+@media (max-width: 1200px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tableWrap {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .disbursementHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .disbursementHeader .buttons {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tableToolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .tableToolbar input {
+    width: 100%;
+  }
+
+  .toolbarActions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .toolbarActions button {
+    flex: 1;
+  }
+
+  table {
+    min-width: 1100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .disbursementHeader h1 {
+    font-size: 20px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statCard h2 {
+    font-size: 18px;
+  }
+
+  .tableCard {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .paginationRight {
+    margin-left: 0;
+  }
+}

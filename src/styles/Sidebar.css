@@ -1,0 +1,210 @@
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  height: 100vh;
+  background: linear-gradient(180deg, #25124f 0%, #37206f 55%, #6b3ee6 100%);
+  color: #ffffff;
+  flex-shrink: 0;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.brand {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.brandIcon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff, #8b5cf6);
+}
+
+.searchBox {
+  height: 36px;
+  margin: 18px 14px;
+  padding: 0 12px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchBox span {
+  font-size: 15px;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.searchBox input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.searchBox input::placeholder {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.sideNav {
+  padding: 0 14px 24px;
+}
+
+.navItem {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #d8cff5;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.navIcon {
+  width: 16px;
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.hasArrow .arrow {
+  margin-left: auto;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.activeParent {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.rmsButton {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+}
+
+.subMenu {
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  margin-bottom: 12px;
+}
+
+.subItem {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #cfc4ee;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.subItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.subItem.activeSub,
+.activeSub {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.subIcon {
+  width: 15px;
+  font-size: 13px;
+}
+
+.closeSidebarBtn {
+  display: none;
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.closeSidebarBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    min-width: 280px;
+    height: 100dvh;
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .sidebar.sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .closeSidebarBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .sidebar {
+    width: 260px;
+    min-width: 260px;
+  }
+}
