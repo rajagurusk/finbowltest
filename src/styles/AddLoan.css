@@ -496,6 +496,276 @@
 .popupOkBtn:hover {
   background: #6941c6;
 }
+.detailsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.detailsHeader h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f1f2c;
+}
+
+.loanDetailsCard {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(47, 43, 61, 0.08);
+}
+
+.detailsTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.detailsTitleRow h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f1f2c;
+}
+
+.detailsTitleRow p {
+  margin-top: 6px;
+  color: #6f687c;
+  font-size: 13px;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #e8f6ff;
+  color: #1684c7;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.statusBadge.small {
+  font-size: 11px;
+  padding: 3px 8px;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 16px 0 22px;
+}
+
+.summaryBox {
+  border: 1px solid #ebe7f2;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.summaryBox p {
+  font-size: 13px;
+  color: #6f687c;
+  margin-bottom: 8px;
+}
+
+.summaryBox h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1f1f2c;
+}
+
+.greenBox {
+  background: #ecfdf3;
+  border-color: #bbf7d0;
+}
+
+.greenBox h3 {
+  color: #12a150;
+}
+
+.detailsBody {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 18px;
+}
+
+.detailsSideMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detailsSideMenu button {
+  height: 36px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #6f687c;
+  text-align: left;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.detailsSideMenu button:hover,
+.detailsSideMenu .activeDetailTab {
+  background: #f1eafe;
+  color: #7f56d9;
+}
+
+.detailsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoCard {
+  border: 1px solid #ebe7f2;
+  border-radius: 10px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.infoCardHeader {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid #ebe7f2;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1f1f2c;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  padding: 20px 18px;
+}
+
+.fourGrid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.fiveGrid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.infoGrid p,
+.brokerDetailsRow p {
+  font-size: 12px;
+  color: #6f687c;
+  margin-bottom: 7px;
+}
+
+.infoGrid h4,
+.brokerDetailsRow h4 {
+  font-size: 14px;
+  color: #1f1f2c;
+  font-weight: 700;
+}
+
+.brokerDetailsRow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  padding: 18px;
+}
+
+.purpleBadge,
+.blueBadge {
+  display: inline-flex;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.purpleBadge {
+  background: #f1eafe;
+  color: #7f56d9;
+}
+
+.blueBadge {
+  background: #e8f6ff;
+  color: #1684c7;
+}
+
+.netBox {
+  background: #ecfdf3;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.netBox h4 {
+  color: #12a150;
+}
+
+.notesBox {
+  padding: 18px;
+  color: #1f1f2c;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.documentsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 18px;
+}
+
+.documentBox {
+  height: 54px;
+  border: 1px solid #ebe7f2;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1f1f2c;
+}
+
+@media (max-width: 1100px) {
+  .summaryGrid,
+  .fourGrid,
+  .fiveGrid,
+  .brokerDetailsRow,
+  .documentsRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detailsBody {
+    grid-template-columns: 1fr;
+  }
+
+  .detailsSideMenu {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .detailsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .summaryGrid,
+  .infoGrid,
+  .fourGrid,
+  .fiveGrid,
+  .brokerDetailsRow,
+  .documentsRow {
+    grid-template-columns: 1fr;
+  }
+}
 
 @keyframes popupScale {
   from {

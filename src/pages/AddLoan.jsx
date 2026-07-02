@@ -1,41 +1,360 @@
 import { useRef, useState } from "react";
 import "../styles/AddLoan.css";
 
-function AddLoan({ onAddLoanToDisbursement }) {
+function LoanDetailsPage({ loanData, onEdit }) {
+  const formatCurrency = (value) => {
+    const number = Number(value || 0);
+
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2,
+    }).format(number);
+  };
+
+  const loanAmount = Number(loanData.loanAmount || 0);
+  const bankCommission = Number(loanData.bankCommission || 0);
+  const referralFee = Number(loanData.referralFee || 0);
+  const commission = Number(loanData.commission || 0);
+
+  const netReceivable =
+    loanAmount > 0 ? (loanAmount * (bankCommission - referralFee)) / 100 : 0;
+
+  const brokerCommission =
+    loanAmount > 0 ? (loanAmount * commission) / 100 : 0;
+
+  return (
+    <>
+      <div className="detailsHeader">
+        <div>
+          <h1>Loan - {loanData.caseId}</h1>
+
+          <div className="breadcrumb">
+            <span>RMS</span>
+            <span>›</span>
+            <span>Loan</span>
+            <span>›</span>
+            <b>{loanData.customerName}</b>
+          </div>
+        </div>
+
+        <div className="buttons">
+          <button className="draftBtn">Archive</button>
+          <button className="draftBtn">Activity Logs</button>
+          <button className="addBtn" onClick={onEdit}>
+            Edit Loan
+          </button>
+        </div>
+      </div>
+
+      <div className="loanDetailsCard">
+        <div className="detailsTitleRow">
+          <div>
+            <h2>{loanData.customerName}</h2>
+            <p>{loanData.productType}</p>
+          </div>
+
+          <span className="statusBadge">{loanData.status}</span>
+        </div>
+
+        <div className="summaryGrid">
+          <div className="summaryBox">
+            <p>Total Sanctioned Amount</p>
+            <h3>{formatCurrency(loanData.loanAmount)}</h3>
+          </div>
+
+          <div className="summaryBox">
+            <p>Bank Commission %</p>
+            <h3>{loanData.bankCommission}%</h3>
+          </div>
+
+          <div className="summaryBox">
+            <p>Referral Fee %</p>
+            <h3>{loanData.referralFee}%</h3>
+          </div>
+
+          <div className="summaryBox greenBox">
+            <p>Net Receivable</p>
+            <h3>{formatCurrency(netReceivable)}</h3>
+          </div>
+        </div>
+
+        <div className="detailsBody">
+          <div className="detailsSideMenu">
+            <button className="activeDetailTab">Customer Information</button>
+            <button>Loan Information</button>
+            <button>Broker Information</button>
+            <button>Commission & Executive Details</button>
+            <button>Notes / Additional Information</button>
+            <button>Payment & Vouchers</button>
+            <button>Documents</button>
+          </div>
+
+          <div className="detailsContent">
+            <div className="infoCard">
+              <div className="infoCardHeader">Customer Information</div>
+
+              <div className="infoGrid">
+                <div>
+                  <p>Customer Name</p>
+                  <h4>{loanData.customerName}</h4>
+                </div>
+
+                <div>
+                  <p>Email</p>
+                  <h4>{loanData.email}</h4>
+                </div>
+
+                <div>
+                  <p>Phone Number</p>
+                  <h4>{loanData.phoneNumber}</h4>
+                </div>
+              </div>
+            </div>
+
+            <div className="infoCard">
+              <div className="infoCardHeader">Loan Information</div>
+
+              <div className="infoGrid fourGrid">
+                <div>
+                  <p>Sanctioned Amt</p>
+                  <h4>{formatCurrency(loanData.loanAmount)}</h4>
+                </div>
+
+                <div>
+                  <p>Disbursed Amt</p>
+                  <h4>₹0.00 awaiting approval</h4>
+                </div>
+
+                <div>
+                  <p>Pending Amt</p>
+                  <h4>{formatCurrency(loanData.loanAmount)}</h4>
+                </div>
+
+                <div>
+                  <p>Case ID</p>
+                  <h4>{loanData.caseId}</h4>
+                </div>
+
+                <div>
+                  <p>Loan Type</p>
+                  <h4>
+                    <span className="purpleBadge">{loanData.productType}</span>
+                  </h4>
+                </div>
+
+                <div>
+                  <p>Bank</p>
+                  <h4>{loanData.bank}</h4>
+                </div>
+
+                <div>
+                  <p>Status</p>
+                  <h4>
+                    <span className="statusBadge small">{loanData.status}</span>
+                  </h4>
+                </div>
+
+                <div>
+                  <p>Stage</p>
+                  <h4>{loanData.stage}</h4>
+                </div>
+              </div>
+            </div>
+
+            <div className="infoCard">
+              <div className="infoCardHeader">Broker Information</div>
+
+              <div className="brokerDetailsRow">
+                <div>
+                  <p>Broker Name</p>
+                  <h4>{loanData.brokerName}</h4>
+                </div>
+
+                <div>
+                  <p>Broker Type</p>
+                  <h4>
+                    <span className="blueBadge">{loanData.brokerType}</span>
+                  </h4>
+                </div>
+
+                <div>
+                  <p>Broker Code</p>
+                  <h4>{loanData.brokerCode}</h4>
+                </div>
+
+                <div>
+                  <p>Commission Percentage</p>
+                  <h4>{loanData.commission}%</h4>
+                </div>
+
+                <div>
+                  <p>Commission Amt</p>
+                  <h4>{formatCurrency(brokerCommission)}</h4>
+                </div>
+              </div>
+            </div>
+
+            <div className="infoCard">
+              <div className="infoCardHeader">
+                Commission & Executive Details
+              </div>
+
+              <div className="infoGrid fiveGrid">
+                <div>
+                  <p>Credit Executive</p>
+                  <h4>{loanData.creditExecutive}</h4>
+                </div>
+
+                <div>
+                  <p>Bank Executive</p>
+                  <h4>{loanData.bankExecutive}</h4>
+                </div>
+
+                <div>
+                  <p>Bank Commission</p>
+                  <h4>{loanData.bankCommission}%</h4>
+                </div>
+
+                <div>
+                  <p>Referral Fee</p>
+                  <h4>{loanData.referralFee}%</h4>
+                </div>
+
+                <div>
+                  <p>Bill Comm Amt</p>
+                  <h4>{formatCurrency((loanAmount * bankCommission) / 100)}</h4>
+                </div>
+
+                <div>
+                  <p>GST Amt 18%</p>
+                  <h4>
+                    {formatCurrency(
+                      ((loanAmount * bankCommission) / 100) * 0.18
+                    )}
+                  </h4>
+                </div>
+
+                <div>
+                  <p>Invoice Amt</p>
+                  <h4>
+                    {formatCurrency(
+                      (loanAmount * bankCommission) / 100 +
+                        ((loanAmount * bankCommission) / 100) * 0.18
+                    )}
+                  </h4>
+                </div>
+
+                <div>
+                  <p>TDS Amt</p>
+                  <h4>
+                    {formatCurrency(
+                      ((loanAmount * bankCommission) / 100) * 0.1
+                    )}
+                  </h4>
+                </div>
+
+                <div className="netBox">
+                  <p>Net Receivable</p>
+                  <h4>{formatCurrency(netReceivable)}</h4>
+                </div>
+              </div>
+            </div>
+
+            <div className="infoCard">
+              <div className="infoCardHeader">
+                Notes / Additional Information
+              </div>
+
+              <div className="notesBox">{loanData.notes}</div>
+            </div>
+
+            <div className="infoCard">
+              <div className="infoCardHeader">Payment & Vouchers</div>
+
+              <div className="infoGrid fiveGrid">
+                <div>
+                  <p>Surplus / Deficit</p>
+                  <h4>₹5,000 Surplus</h4>
+                </div>
+
+                <div>
+                  <p>Receipt Amount</p>
+                  <h4>₹1.3L</h4>
+                </div>
+
+                <div>
+                  <p>Receipt Date</p>
+                  <h4>2024-04-15</h4>
+                </div>
+
+                <div>
+                  <p>Advance Payment</p>
+                  <h4>₹50,000</h4>
+                </div>
+
+                <div>
+                  <p>Payment Date</p>
+                  <h4>2024-04-01</h4>
+                </div>
+              </div>
+            </div>
+
+            <div className="infoCard">
+              <div className="infoCardHeader">Documents</div>
+
+              <div className="documentsRow">
+                <div className="documentBox">📄 Invoice.pdf</div>
+                <div className="documentBox">📄 Agreement.pdf</div>
+                <div className="documentBox">📄 Loan.pdf</div>
+                <div className="documentBox">📄 KYC.pdf</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function AddLoan() {
   const formRef = useRef(null);
   const [isSaved, setIsSaved] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [loanDetails, setLoanDetails] = useState(null);
 
   const [popup, setPopup] = useState({
     show: false,
     type: "success",
     title: "",
     message: "",
-    redirectData: null,
+    detailsData: null,
   });
 
-  const showPopup = (type, title, message, redirectData = null) => {
+  const showPopup = (type, title, message, detailsData = null) => {
     setPopup({
       show: true,
       type,
       title,
       message,
-      redirectData,
+      detailsData,
     });
   };
 
   const closePopup = () => {
-    const redirectData = popup.redirectData;
+    const detailsData = popup.detailsData;
 
     setPopup({
       show: false,
       type: "success",
       title: "",
       message: "",
-      redirectData: null,
+      detailsData: null,
     });
 
-    if (redirectData && onAddLoanToDisbursement) {
-      onAddLoanToDisbursement(redirectData);
+    if (detailsData) {
+      setLoanDetails(detailsData);
+      setShowDetails(true);
     }
   };
 
@@ -71,32 +390,7 @@ function AddLoan({ onAddLoanToDisbursement }) {
       }
     }
 
-    const customerName = formRef.current.querySelector('[name="customerName"]');
     const email = formRef.current.querySelector('[name="email"]');
-    const phoneNumber = formRef.current.querySelector('[name="phoneNumber"]');
-    const loanAmount = formRef.current.querySelector('[name="loanAmount"]');
-    const bankCommission = formRef.current.querySelector(
-      '[name="bankCommission"]'
-    );
-    const referralFee = formRef.current.querySelector('[name="referralFee"]');
-    const creditExecutive = formRef.current.querySelector(
-      '[name="creditExecutive"]'
-    );
-    const bankExecutive = formRef.current.querySelector(
-      '[name="bankExecutive"]'
-    );
-    const brokerName = formRef.current.querySelector('[name="brokerName"]');
-    const commission = formRef.current.querySelector('[name="commission"]');
-
-    if (/\d/.test(customerName.value)) {
-      showPopup(
-        "error",
-        "Invalid Name",
-        "Customer name should not contain numbers."
-      );
-      customerName.focus();
-      return false;
-    }
 
     if (!isGmail(email.value)) {
       showPopup(
@@ -104,87 +398,8 @@ function AddLoan({ onAddLoanToDisbursement }) {
         "Invalid Email",
         "Email must be valid and end with @gmail.com."
       );
+
       email.focus();
-      return false;
-    }
-
-    if (/[A-Za-z]/.test(phoneNumber.value)) {
-      showPopup(
-        "error",
-        "Invalid Phone Number",
-        "Phone number should contain only numbers."
-      );
-      phoneNumber.focus();
-      return false;
-    }
-
-    if (/[A-Za-z]/.test(loanAmount.value)) {
-      showPopup(
-        "error",
-        "Invalid Loan Amount",
-        "Loan amount should contain only numbers."
-      );
-      loanAmount.focus();
-      return false;
-    }
-
-    if (/[A-Za-z]/.test(bankCommission.value)) {
-      showPopup(
-        "error",
-        "Invalid Commission",
-        "Bank commission should contain only numbers."
-      );
-      bankCommission.focus();
-      return false;
-    }
-
-    if (/[A-Za-z]/.test(referralFee.value)) {
-      showPopup(
-        "error",
-        "Invalid Referral Fee",
-        "Referral fee should contain only numbers."
-      );
-      referralFee.focus();
-      return false;
-    }
-
-    if (/\d/.test(creditExecutive.value)) {
-      showPopup(
-        "error",
-        "Invalid Executive Name",
-        "Credit executive name should not contain numbers."
-      );
-      creditExecutive.focus();
-      return false;
-    }
-
-    if (/\d/.test(bankExecutive.value)) {
-      showPopup(
-        "error",
-        "Invalid Executive Name",
-        "Bank executive name should not contain numbers."
-      );
-      bankExecutive.focus();
-      return false;
-    }
-
-    if (/\d/.test(brokerName.value)) {
-      showPopup(
-        "error",
-        "Invalid Broker Name",
-        "Broker name should not contain numbers."
-      );
-      brokerName.focus();
-      return false;
-    }
-
-    if (/[A-Za-z]/.test(commission.value)) {
-      showPopup(
-        "error",
-        "Invalid Commission",
-        "Commission should contain only numbers."
-      );
-      commission.focus();
       return false;
     }
 
@@ -198,6 +413,10 @@ function AddLoan({ onAddLoanToDisbursement }) {
     fields.forEach((field) => {
       data[field.name] = field.value;
     });
+
+    data.caseId = `LN-${new Date().getFullYear()}-${Date.now()
+      .toString()
+      .slice(-5)}`;
 
     return data;
   };
@@ -228,10 +447,19 @@ function AddLoan({ onAddLoanToDisbursement }) {
     showPopup(
       "success",
       "Loan Added",
-      "Loan added successfully. Click OK to view it in Disbursement.",
+      "Loan added successfully. Click OK to view the loan details.",
       data
     );
   };
+
+  if (showDetails && loanDetails) {
+    return (
+      <LoanDetailsPage
+        loanData={loanDetails}
+        onEdit={() => setShowDetails(false)}
+      />
+    );
+  }
 
   return (
     <>
@@ -307,7 +535,9 @@ function AddLoan({ onAddLoanToDisbursement }) {
             </div>
 
             <div className="formGroup">
-              <label>Email</label>
+              <label>
+                Email <span>*</span>
+              </label>
 
               <input
                 name="email"
@@ -317,7 +547,9 @@ function AddLoan({ onAddLoanToDisbursement }) {
             </div>
 
             <div className="formGroup">
-              <label>Phone Number</label>
+              <label>
+                Phone Number <span>*</span>
+              </label>
 
               <input
                 name="phoneNumber"
@@ -392,11 +624,14 @@ function AddLoan({ onAddLoanToDisbursement }) {
                 <option>Active</option>
                 <option>Pending</option>
                 <option>Closed</option>
+                <option>Reconciled</option>
               </select>
             </div>
 
             <div className="formGroup">
-              <label>Priority</label>
+              <label>
+                Priority <span>*</span>
+              </label>
 
               <select name="priority">
                 <option value="">Select Priority</option>
@@ -422,20 +657,20 @@ function AddLoan({ onAddLoanToDisbursement }) {
               <input
                 name="bankCommission"
                 type="text"
-                placeholder="0.5500"
+                placeholder="0.75"
                 onInput={allowOnlyNumbers}
               />
             </div>
 
             <div className="formGroup">
               <label>
-                Referral Fee <span>*</span>
+                Referral Fee % <span>*</span>
               </label>
 
               <input
                 name="referralFee"
                 type="text"
-                placeholder="0.5500"
+                placeholder="0.50"
                 onInput={allowOnlyNumbers}
               />
             </div>
@@ -461,7 +696,7 @@ function AddLoan({ onAddLoanToDisbursement }) {
               <input
                 name="bankExecutive"
                 type="text"
-                placeholder="Amit Sharma"
+                placeholder="Priya Nair"
                 onInput={allowOnlyLetters}
               />
             </div>
@@ -483,7 +718,7 @@ function AddLoan({ onAddLoanToDisbursement }) {
                 <input
                   name="brokerName"
                   type="text"
-                  placeholder="Enter Broker Name"
+                  placeholder="Karthik Agencies"
                   onInput={allowOnlyLetters}
                 />
               </div>
@@ -495,6 +730,9 @@ function AddLoan({ onAddLoanToDisbursement }) {
 
                 <select name="brokerType">
                   <option value="">Select Broker Type</option>
+                  <option>Aggregator</option>
+                  <option>Connector</option>
+                  <option>Sub-connector</option>
                   <option>Direct</option>
                   <option>Agent</option>
                   <option>Referral</option>
